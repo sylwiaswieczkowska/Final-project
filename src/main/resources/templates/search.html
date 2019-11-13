@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Search form</title>
+    <th:block th:replace="~{includes/commonScripts :: head}"></th:block>
+</head>
+<body>
+<div th:fragment="search">
+    <form th:action="@{/search}" method="get" >
+        <div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom box-shadow">
+            <h5 class="my-0 mr-md-auto font-weight-normal"></h5>
+            <label for="title"></label>
+            <input class="my-2 my-md-0 mr-md-3" th:value="${title}" id="title" type="text" name="title"
+                   placeholder="Szukaj...">
+            <button class="btn btn-blue btn-small" value="search" type="submit">Szukaj</button>
+        </div>
+    </form>
+</div>
+<th:block th:replace="~{includes/commonScripts :: end-of-body}"></th:block>
+
+</body>
+</html>

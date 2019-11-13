@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+xmlns:sec="http://thymeleaf.org/thymeleaf-extras-springsecurity3">
+<th:block th:replace="~{includes/commonScripts :: head}"></th:block>
+<head>
+    <meta charset="UTF-8">
+    <title>Register form success</title>
+</head>
+<body>
+<div class="container">
+    <div class="row">
+        <div class="col-md-4 col-sm-6">
+            <a href="/" class="btn btn-bordered"> Wróć na stronę główną </a>
+        </div>
+        <div  class="col-md-4 col-sm-6">
+            <div sec:authorize="registerService.getLoggedUserEmail()">
+                <span class="icon icon-user"sec:authentication="username"></span>
+            </div>
+<!--            <a class="user-link"><i class="icon icon-user"></i> </a>-->
+<!--                </a>-->
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12 col-xs-no-pd msg">
+                    <p class="success">Konto zarejestrowane pomyślnie.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<th:block th:replace="~{includes/commonScripts :: end-of-body}"></th:block>
+</body>
+</html>

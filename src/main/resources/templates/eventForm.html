@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Event Form</title>
+    <th:block th:replace="~{includes/commonScripts :: head}"></th:block>
+</head>
+<body>
+<div class="container">
+    <div class="row">
+        <div class="col-sm-6 col-md-4 col-sm-offset-3 col-md-offset-4">
+            <div class="card  my-5">
+                <div class="card-body">
+                    <form th:action="@{/event}" method="post" th:object="${eventForm}" class="edit-form">
+                        <header class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
+                            <h2 class="my-0 font-weight-normal">Nowe wydarzenie</h2>
+                        </header>
+                        <div class="input-group ">
+                            <fildset class="input">
+                                <input class="my-0 font-weight-normal" name="title" type="text"
+                                       th:field="*{title}" placeholder="Tytuł"/>
+                                <span th:errors="*{title}">Dodaj tytuł</span>
+                            </fildset>
+                        </div>
+                        <div class="input-group ">
+                            <textarea class="my-0 font-weight-normal" name="description"
+                                      rows="10" cols="50" placeholder="Opis wydarzenia"
+                                      th:field="*{description}"></textarea>
+                        </div>
+                        <div class="input-group ">
+                            <fildset class="input">
+                                <label class="my-0 font-weight-normal" for="startEvent">Początek wydarzenia</label>
+                                <input id="startEvent" name="startEvent"  type="datetime-local" th:field="*{startEvent}"
+                                       class="input-sm form-control"  placeholder="Date from: YYYY-MM-DD hh:mm:ss"/>
+                                <span th:errors="*{startEvent}"></span>
+                            </fildset>
+                        </div>
+                        <div class="input-group ">
+                            <fildset class="input">
+                                <label class="my-0 font-weight-normal" for="endEvent">Koniec wydarzenia</label>
+                                <input id="endEvent" name="endEvent" type="datetime-local" th:field="*{endEvent}"
+                                       class="input-sm form-control" placeholder="Date from: YYYY-MM-DD hh:mm:ss"/>
+                                <span th:errors="*{endEvent}"></span>
+                            </fildset>
+                        </div>
+                        <input class="btn btn-blue btn-full" type="submit" value="Zapisz">
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<th:block th:replace="~{includes/commonScripts :: end-of-body}"></th:block>
+</body>
+</html>

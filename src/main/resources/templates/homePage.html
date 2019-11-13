@@ -1,13 +1,62 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Home Page</title>
     <th:block th:replace="~{includes/commonScripts :: head}"></th:block>
+
 </head>
 <body>
-<h1>Witaj !!</h1>
-<button name=""></button>
 
+<span th:if="${@contextService.getLoggedUserEmail() == null}"
+      class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom box-shadow">
+
+    <h5 class="my-0 mr-md-auto font-weight-normal"></h5>
+        <div class="my-2 my-md-0 mr-md-3">
+        <a href="/login" class="btn btn-blue btn-full btn-small">Logowanie</a>
+    </div>
+    <div class="my-2 my-md-0 mr-md-3">
+        <a href="/register" class="btn btn-blue btn-full btn-small">Rejestracja</a>
+    </div>
+  </span>
+<th:div th:replace="~{search::search}"></th:div>
+<span class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom box-shadow "
+      th:if="${@contextService.getLoggedUserEmail() != null}">
+            <div class="my-2 my-md-0 mr-md-3 font-weight-normal"
+                 th:text="${' Zalogowany jako: ' + @contextService.getLoggedUserEmail()}">
+            </div>
+     <div class="my-2 my-md-0 mr-md-3">
+    <span sec:authentication="name"></span>
+     <a sec:authorize="isAuthenticated()" href="/event" class="btn btn-blue btn-full btn-small">Dodaj Wydarzenie</a>
+            </div>
+      </span>
+
+<div class="col-sm-6 col-md-4 col-sm-offset-3 col-md-offset-4">
+    <div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto bg-white text-center">
+        <h1 class="display-4">Events</h1>
+        <span th:each="eventForm : ${eventFormList}">
+            <div class="bg-info" for="title" th:text="${eventForm.getTitle()}"></div>
+            <ul id="title" class="list-group">
+                <li class="list-group-item" th:text="${eventForm.description.substring(0,50)}"
+                    style="word-wrap: break-word"></li>
+                <li class="list-group-item"
+                    th:text="'Od: ' + ${eventForm.getStartEvent()} + ' do: '+ ${eventForm.getEndEvent()}">
+                </li>
+            </ul>
+        </span>
+        <span th:each="eventForm : ${eventForm}">
+            <div class="bg-info" for="title" th:text="${eventForm.getTitle()}"></div>
+            <ul  class="list-group">
+                <li class="list-group-item" th:text="${eventForm.description.substring(0,50)}"
+                    style="word-wrap: break-word"></li>
+                <li class="list-group-item"
+                    th:text="'Od: ' + ${eventForm.getStartEvent()} + ' do: '+ ${eventForm.getEndEvent()}">
+                </li>
+            </ul>
+        </span>
+    </div>
+</div>
+<th:block th:replace="~{includes/commonScripts :: end-of-body}"></th:block>
 </body>
 </html>
